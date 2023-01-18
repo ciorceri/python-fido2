@@ -14,7 +14,31 @@
   <hr>
 
   <h2>Available actions</h2>
-  <a href="/register.html">Register</a><br>
-  <a href="/authenticate.html">Authenticate</a><br>
+  <pre>Roaming Authenticators :<br/>  Bluetooth Low Energy (BLE), Near Field Communication (NFC), USB (YubiKey)</pre>
+  <pre>Platform Authenticators :<br/>  Windows 10, MacOS, Chrome OS, Android, iOS, iPadOS</pre>
+  <fieldset>
+    <legend>Select authenticator:</legend>
+    <div>
+      <input type="radio" id="rb1" name="rb_platform" value="any" checked/>
+      Any authenticator
+    </div>
+    <div>
+      <input type="radio" id="rb1" name="rb_platform" value="cross-platform"/>
+      Roaming Authenticator (Cross-Platform)
+    </div>
+    <div>
+      <input type="radio" id="rb2" name="rb_platform" value="platform"/>
+      Platform Authenticator (Platform)
+    </div>
+  </fieldset>
+  <a href="/register.html" onclick="add_params()" id="href_reg">Register</a><br>
+  <a href="/authenticate.html" onclick="add_params()" id="href_auth">Authenticate</a><br>
+  <script type="text/javascript">
+    function add_params() {
+    	var s_auth = document.querySelector('input[name="rb_platform"]:checked').value;
+	document.getElementById('href_reg').href = "/register.html?authenticator=" + s_auth;
+	document.getElementById('href_auth').href = "/authenticate.html?authenticator=" + s_auth;
+    }
+  </script>
 </body>
 </html>

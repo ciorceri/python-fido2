@@ -8,6 +8,10 @@
         parseCreationOptionsFromJSON,
     } from '/webauthn-json.browser-ponyfill.js';
 
+    const params = new URLSearchParams(document.location.search);
+    document.getElementById("authenticator_type").innerHTML = "with " + params.get("authenticator") + " authenticator";
+
+
     async function start() {
       let request = await fetch('/api/register/begin', {
         method: 'POST',
@@ -44,7 +48,7 @@
   <p>This demo requires a browser supporting the WebAuthn API!</p>
   <hr>
 
-  <h2>Register a credential</h2>
+  <h2>Register a credential<div id="authenticator_type"></div></h2>
   <div id="initial">
     <button onclick="start();">Click here to start</button>
   </div>

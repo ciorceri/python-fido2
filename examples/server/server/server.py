@@ -70,7 +70,11 @@ def register_begin():
         ),
         credentials,
         user_verification="discouraged",
-        authenticator_attachment="cross-platform",
+        # authenticator_attachment="cross-platform",
+
+        # user_verification="required",
+        # authenticator_attachment="platform",
+        authenticator_attachment=["cross-platform", "platform"],
     )
 
     session["state"] = state
