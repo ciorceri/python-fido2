@@ -62,6 +62,17 @@ def index():
 
 @app.route("/api/register/begin", methods=["POST"])
 def register_begin():
+
+    try:
+        auth_type = request.json['authenticator']
+    except:
+        auth_type = 'any'
+
+    if auth_type == 'any':
+        _authenticator_attachment = ['cross-platform', 'platform']
+    else:
+        _authenticator_attachment = auth_type
+
     options, state = server.register_begin(
         PublicKeyCredentialUserEntity(
             id=b"user_id",
@@ -70,11 +81,7 @@ def register_begin():
         ),
         credentials,
         user_verification="discouraged",
-        # authenticator_attachment="cross-platform",
-
-        # user_verification="required",
-        # authenticator_attachment="platform",
-        authenticator_attachment=["cross-platform", "platform"],
+        authenticator_attachment=_authenticator_attachment,
     )
 
     session["state"] = state

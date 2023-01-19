@@ -10,11 +10,13 @@
 
     const params = new URLSearchParams(document.location.search);
     document.getElementById("authenticator_type").innerHTML = "with " + params.get("authenticator") + " authenticator";
-
+    console.info(Object.fromEntries(params));
 
     async function start() {
       let request = await fetch('/api/register/begin', {
         method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(Object.fromEntries(params)), 
       });
       let json = await request.json();
       let options = parseCreationOptionsFromJSON(json);
