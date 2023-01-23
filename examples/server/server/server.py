@@ -80,7 +80,7 @@ def register_begin():
             display_name="A. User",
         ),
         credentials,
-        user_verification="discouraged",
+        user_verification="discouraged",  # discouraged, preferred, required
         authenticator_attachment=_authenticator_attachment,
     )
 
@@ -88,6 +88,7 @@ def register_begin():
     print("\n\n\n\n")
     print(options)
     print("\n\n\n\n")
+
 
     return jsonify(dict(options))
 
@@ -132,7 +133,9 @@ def authenticate_complete():
 
 def main():
     print(__doc__)
-    app.run(ssl_context="adhoc", debug=False)
+    app.run(host='0.0.0.0', ssl_context="adhoc", debug=False)
+    # use a selfsigned certificate (valid until 2033) : https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https
+    # app.run(host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'), debug=False)
 
 
 if __name__ == "__main__":
