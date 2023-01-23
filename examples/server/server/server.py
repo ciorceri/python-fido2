@@ -46,7 +46,8 @@ fido2.features.webauthn_json_mapping.enabled = True
 app = Flask(__name__, static_url_path="")
 app.secret_key = os.urandom(32)  # Used for session.
 
-rp = PublicKeyCredentialRpEntity(name="Demo server", id="localhost")
+# rp = PublicKeyCredentialRpEntity(name="Demo server", id="localhost")
+rp = PublicKeyCredentialRpEntity(name="Demo server", id="fido.server")
 server = Fido2Server(rp)
 
 
